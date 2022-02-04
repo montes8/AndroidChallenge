@@ -1,0 +1,79 @@
+package com.challenge.androidchallenge.repository.di
+
+import android.content.Context
+import com.challenge.androidchallenge.BuildConfig
+import com.challenge.androidchallenge.repository.AUTHORIZATION
+import com.challenge.androidchallenge.repository.NAME_BASE_URL
+import com.challenge.androidchallenge.repository.ServiceApi
+import com.challenge.androidchallenge.repository.TIMEOUT
+import com.challenge.androidchallenge.repository.api.AppNetwork
+import com.challenge.androidchallenge.usecases.repository.IAppRepositoryNetwork
+import okhttp3.Cache
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
+import okhttp3.Response
+import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.dsl.module
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
+
+
+val networkModule = module {
+    single { providerHttpLoggingInterceptor() }
+    single { providerCache(get()) }
+    single { ApiInterceptor() }
+    single { providerOkHttpClient(get(), get(),get()) }
+    single { providerRetrofit(getProperty(NAME_BASE_URL), get()) }
+    single { providerApi(get()) }
+    single<IAppRepositoryNetwork> { AppNetwork() }
+
+}
+
+fun providerApi(retrofit: Retrofit): ServiceApi {
+    return retrofit.create(ServiceApi::class.java)
+}
+
+fun providerRetrofit(baseUrl: String, client: OkHttpClient): Retrofit {
+    return Retrofit.Builder()
+        .addConverterFactory(GsonConverterFactory.create())
+        .client(client)
+        .baseUrl(baseUrl)
+        .build()
+}
+
+fun providerOkHttpClient(
+    httpLoggingInterceptor: HttpLoggingInterceptor,
+    apiInterceptor: ApiInterceptor,context: Context
+): OkHttpClient {
+    return OkHttpClient.Builder()
+        .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
+        .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
+        .readTimeout(TIMEOUT, TimeUnit.SECONDS)
+        .addInterceptor(httpLoggingInterceptor)
+        .addInterceptor(apiInterceptor)
+        .build()
+}
+
+fun providerCache(context: Context): Cache {
+    val cacheSize: Long = 10485760
+    return Cache(context.cacheDir, cacheSize)
+}
+
+fun providerHttpLoggingInterceptor(): HttpLoggingInterceptor {
+    val logging = HttpLoggingInterceptor()
+    logging.level =
+        if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
+    return logging
+}
+
+class ApiInterceptor() : Interceptor {
+    override fun intercept(chain: Interceptor.Chain): Response {
+        var request = chain.request()
+        val builder = request.newBuilder()
+        builder.addHeader(AUTHORIZATION, "token")
+        request = builder.build()
+        return chain.proceed(request)
+    }
+}
+
