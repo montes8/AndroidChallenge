@@ -7,6 +7,9 @@ import android.net.NetworkCapabilities
 import android.provider.Settings
 import android.view.inputmethod.InputMethodManager
 import com.challenge.androidchallenge.repository.exception.GenericException
+import com.challenge.androidchallenge.repository.exception.NetworkException
+import com.challenge.androidchallenge.repository.utils.ErrorMessage
+import com.challenge.androidchallenge.repository.utils.ErrorMessageDefault
 import com.challenge.androidchallenge.repository.utils.generalErrorMessage
 import com.google.gson.Gson
 import okhttp3.ResponseBody
@@ -56,5 +59,13 @@ fun Activity.hideKeyboard() {
     val inputMethodManager: InputMethodManager =
         this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
     inputMethodManager.hideSoftInputFromWindow(this.currentFocus?.windowToken, 0)
+}
+
+fun mapperError(error : Throwable):String{
+    return when (error) {
+        is NetworkException -> { ErrorMessage }
+        is GenericException -> {error.messageDefault}
+        else -> { ErrorMessageDefault }
+    }
 }
 

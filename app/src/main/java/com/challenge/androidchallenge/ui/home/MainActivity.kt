@@ -1,48 +1,43 @@
 package com.challenge.androidchallenge.ui.home
 
-import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import com.challenge.androidchallenge.R
-import com.challenge.androidchallenge.repository.exception.GenericException
-import com.challenge.androidchallenge.repository.exception.NetworkException
 import com.challenge.androidchallenge.repository.hideKeyboard
+import com.challenge.androidchallenge.repository.mapperError
 import com.challenge.androidchallenge.repository.utils.EMPTY
-import com.challenge.androidchallenge.repository.utils.ErrorMessage
-import com.challenge.androidchallenge.repository.utils.ErrorMessageDefault
 import com.challenge.androidchallenge.ui.AppViewModel
+import com.challenge.androidchallenge.ui.BaseActivity
 import com.challenge.androidchallenge.ui.detail.DetailActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private val viewModel: AppViewModel by viewModel(clazz = AppViewModel::class)
 
     private val adapterPlace = PlaceAdapter()
     private var textSearch = EMPTY
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+    override fun getLayout() = R.layout.activity_main
 
+    override fun setUpView() {
         editSearch.apply {
             backListener = {
                 onBackPressed()
             }
             searchTextChangeListener = {
                 textSearch = it.toString()
-                }
+            }
             searchListener = {
                 openSearch(textSearch)
             }
         }
         editSearch.requestFocus()
         contentActivityList.setOnFocusChangeListener { _, hasFocus -> if (hasFocus) this.hideKeyboard() }
-
-
         rvPlace.adapter = adapterPlace
+    }
 
+    override fun observeViewModel() {
         viewModel.successPlacesLiveData.observe(this,{
             if (it.isNotEmpty()) {
                 loadingEnd()
@@ -52,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
 
         viewModel.errorLiveData.observe(this,{
-            mapperError(it)
+            configError(mapperError(it))
         })
     }
 
@@ -61,21 +56,6 @@ class MainActivity : AppCompatActivity() {
         loading()
     }
 
-    private fun mapperError(error : Throwable){
-        when (error) {
-            is NetworkException -> {
-                configError(ErrorMessage)
-            }
-
-            is GenericException -> {
-                configError(error.messageDefault)
-            }
-
-            else -> {
-                configError(ErrorMessageDefault)
-            }
-        }
-    }
 
     private fun loading(){
         this.hideKeyboard()

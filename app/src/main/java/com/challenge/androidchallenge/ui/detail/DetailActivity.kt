@@ -2,16 +2,15 @@ package com.challenge.androidchallenge.ui.detail
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import com.challenge.androidchallenge.R
 import com.challenge.androidchallenge.entity.PlacesModel
 import com.challenge.androidchallenge.repository.utils.DATA_PLACE
 import com.challenge.androidchallenge.ui.AppViewModel
+import com.challenge.androidchallenge.ui.BaseActivity
 import kotlinx.android.synthetic.main.activity_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class DetailActivity : AppCompatActivity() {
+class DetailActivity : BaseActivity() {
 
     private val viewModel: AppViewModel by viewModel(clazz = AppViewModel::class)
     private var dataModel: PlacesModel? = null
@@ -25,21 +24,20 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail)
+    override fun getLayout() = R.layout.activity_detail
+
+    override fun setUpView() {
         rvDetailPlace.adapter = adapterDetail
         intent.getSerializableExtra(DATA_PLACE).let {
             dataModel = it as PlacesModel?
+            dataModel?.let {data ->
+                txtValueGeneric.text = data.name
+                adapterDetail.parameterList = viewModel.configDataGeneric(data)
+            }
         }
-        configData()
-
     }
 
-    private fun configData() {
-        dataModel?.let {
-            txtValueGeneric.text = it.name
-            adapterDetail.parameterList = viewModel.configDataGeneric(it)
-        }
+    override fun observeViewModel() {
+        //none
     }
 }
