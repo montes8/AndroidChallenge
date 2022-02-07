@@ -10,8 +10,10 @@ class AppNetwork : IAppRepositoryNetwork, BaseNetwork(){
 
     private val serviceApi: ServiceApi by inject()
 
-    override suspend fun loadSearchData(): Boolean {
-        return true
+    override suspend fun loadSearchData(query : String): Boolean {
+        return executeWithConnection {
+            serviceApi.getPlace("-11.9556891,-77.0025089",query)
+            true
+        }
     }
-
 }

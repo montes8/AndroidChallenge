@@ -2,11 +2,10 @@ package com.challenge.androidchallenge.repository.di
 
 import android.content.Context
 import com.challenge.androidchallenge.BuildConfig
-import com.challenge.androidchallenge.repository.AUTHORIZATION
-import com.challenge.androidchallenge.repository.NAME_BASE_URL
 import com.challenge.androidchallenge.repository.ServiceApi
-import com.challenge.androidchallenge.repository.TIMEOUT
 import com.challenge.androidchallenge.repository.api.AppNetwork
+import com.challenge.androidchallenge.repository.utils.NAME_BASE_URL
+import com.challenge.androidchallenge.repository.utils.TIMEOUT
 import com.challenge.androidchallenge.usecases.repository.IAppRepositoryNetwork
 import okhttp3.Cache
 import okhttp3.Interceptor
@@ -71,7 +70,8 @@ class ApiInterceptor() : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         var request = chain.request()
         val builder = request.newBuilder()
-        builder.addHeader(AUTHORIZATION, "token")
+        builder.addHeader("Authorization", "fsq34RCNMAOzydDw3mNUlZLuMbNzJxfrx7teU5KXlyw1CNI=")
+        builder.addHeader("Accept", "application/json")
         request = builder.build()
         return chain.proceed(request)
     }

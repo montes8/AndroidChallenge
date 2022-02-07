@@ -1,4 +1,4 @@
-package com.challenge.androidchallenge.repository
+package com.challenge.androidchallenge.repository.utils
 
 const val NAME_BASE_URL = "BASE_URL"
 const val TIMEOUT = 60L

@@ -9,6 +9,5 @@ class AppUseCase : KoinComponent {
 
     private val iAppRepositoryNetwork: IAppRepositoryNetwork by inject()
 
-    suspend fun loadSearchData() = iAppRepositoryNetwork.loadSearchData()
-
+    suspend fun loadSearchData(query : String) = iAppRepositoryNetwork.loadSearchData(query)
 }

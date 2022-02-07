@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="EditSearchLayout">
+        <attr name="search_hint" format="string" />
+        <attr name="search_clear_icon" format="reference" />
+        <attr name="search_enable_edit" format="boolean" />
+    </declare-styleable>
+</resources>
