@@ -5,9 +5,9 @@ import com.challenge.androidchallenge.repository.BaseNetwork
 import com.challenge.androidchallenge.repository.ServiceApi
 import com.challenge.androidchallenge.repository.exception.GenericException
 import com.challenge.androidchallenge.repository.model.PlaceContentResponse
-import com.challenge.androidchallenge.repository.toCompleteErrorModel
 import com.challenge.androidchallenge.repository.utils.generalErrorMessage
-import com.challenge.androidchallenge.repository.validateBody
+import com.challenge.androidchallenge.repository.utils.toCompleteErrorModel
+import com.challenge.androidchallenge.repository.utils.validateBody
 import com.challenge.androidchallenge.usecases.repository.IAppRepositoryNetwork
 import org.koin.core.inject
 

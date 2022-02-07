@@ -5,6 +5,7 @@ import android.content.Intent
 import com.challenge.androidchallenge.R
 import com.challenge.androidchallenge.entity.PlacesModel
 import com.challenge.androidchallenge.repository.utils.DATA_PLACE
+import com.challenge.androidchallenge.repository.utils.loadImageUrlPicasso
 import com.challenge.androidchallenge.ui.AppViewModel
 import com.challenge.androidchallenge.ui.BaseActivity
 import kotlinx.android.synthetic.main.activity_detail.*
@@ -33,6 +34,7 @@ class DetailActivity : BaseActivity() {
             dataModel?.let {data ->
                 txtValueGeneric.text = data.name
                 adapterDetail.parameterList = viewModel.configDataGeneric(data)
+                if (data.categories.isNotEmpty())imageGenericDetail.loadImageUrlPicasso("${data.categories[0].icon.prefix}${data.categories[0].icon.suffix}}")
             }
         }
     }

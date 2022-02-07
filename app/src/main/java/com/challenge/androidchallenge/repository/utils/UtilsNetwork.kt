@@ -1,4 +1,4 @@
-package com.challenge.androidchallenge.repository
+package com.challenge.androidchallenge.repository.utils
 
 import android.app.Activity
 import android.content.Context
@@ -6,27 +6,17 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.provider.Settings
 import android.view.inputmethod.InputMethodManager
+import android.widget.ImageView
+import com.challenge.androidchallenge.R
 import com.challenge.androidchallenge.repository.exception.GenericException
 import com.challenge.androidchallenge.repository.exception.NetworkException
 import com.challenge.androidchallenge.repository.utils.ErrorMessage
 import com.challenge.androidchallenge.repository.utils.ErrorMessageDefault
 import com.challenge.androidchallenge.repository.utils.generalErrorMessage
 import com.google.gson.Gson
+import com.squareup.picasso.Picasso
 import okhttp3.ResponseBody
 import retrofit2.Response
-
-fun getDensity(context: Context): Float {
-
-    return context.resources.displayMetrics.density
-}
-
-fun getWidth(context: Context): Int {
-    return context.resources.displayMetrics.widthPixels
-}
-
-fun getHeight(context: Context): Int {
-    return context.resources.displayMetrics.heightPixels
-}
 
 
 fun Context?.isConnected(): Boolean {
@@ -66,6 +56,16 @@ fun mapperError(error : Throwable):String{
         is NetworkException -> { ErrorMessage }
         is GenericException -> {error.messageDefault}
         else -> { ErrorMessageDefault }
+    }
+}
+
+fun ImageView.loadImageUrlPicasso(url: String?) {
+    url?.let {
+        if (it.isNotEmpty()) {
+            Picasso.get()
+                .load(it).placeholder(R.drawable.shape_place_holder)
+                .into(this)
+        }
     }
 }
 

@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.challenge.androidchallenge.R
 import com.challenge.androidchallenge.entity.PlacesModel
+import com.challenge.androidchallenge.repository.utils.loadImageUrlPicasso
 import kotlinx.android.synthetic.main.row_place.view.*
 
 class PlaceAdapter(var onClickItem: ((PlacesModel) -> Unit)? = null) :
@@ -25,6 +26,7 @@ class PlaceAdapter(var onClickItem: ((PlacesModel) -> Unit)? = null) :
         val model = parameterList[position]
         holder.itemView.textRowName.text = model.name
         holder.itemView.textRowZone.text = model.timezone
+        if (model.categories.isNotEmpty())holder.itemView.imgRow.loadImageUrlPicasso("${model.categories[0].icon.prefix}${model.categories[0].icon.suffix}}")
         holder.itemView.setOnClickListener { onClickItem?.invoke(model) }
     }
 

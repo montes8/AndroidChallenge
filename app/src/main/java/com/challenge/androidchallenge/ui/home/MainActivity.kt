@@ -2,9 +2,9 @@ package com.challenge.androidchallenge.ui.home
 
 import android.view.View
 import com.challenge.androidchallenge.R
-import com.challenge.androidchallenge.repository.hideKeyboard
-import com.challenge.androidchallenge.repository.mapperError
 import com.challenge.androidchallenge.repository.utils.EMPTY
+import com.challenge.androidchallenge.repository.utils.hideKeyboard
+import com.challenge.androidchallenge.repository.utils.mapperError
 import com.challenge.androidchallenge.ui.AppViewModel
 import com.challenge.androidchallenge.ui.BaseActivity
 import com.challenge.androidchallenge.ui.detail.DetailActivity

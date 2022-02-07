@@ -2,6 +2,8 @@ package com.challenge.androidchallenge.repository
 
 import android.content.Context
 import com.challenge.androidchallenge.repository.exception.NetworkException
+import com.challenge.androidchallenge.repository.utils.isAirplaneModeActive
+import com.challenge.androidchallenge.repository.utils.isConnected
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 

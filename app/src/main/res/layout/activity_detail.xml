@@ -76,12 +76,12 @@
                                 android:layout_width="@dimen/size_0"
                                 android:layout_height="wrap_content"
                                 android:text="@string/text_title_name_detail"
-                                app:layout_constraintEnd_toStartOf="@+id/policyImageGeneric"
+                                app:layout_constraintEnd_toStartOf="@+id/imageGenericDetail"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <androidx.appcompat.widget.AppCompatImageButton
-                                android:id="@+id/policyImageGeneric"
+                                android:id="@+id/imageGenericDetail"
                                 android:layout_width="@dimen/size_48"
                                 android:layout_height="@dimen/size_48"
                                 android:adjustViewBounds="true"
@@ -98,7 +98,7 @@
                                 android:layout_width="@dimen/size_0"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/size_4"
-                                app:layout_constraintEnd_toStartOf="@id/policyImageGeneric"
+                                app:layout_constraintEnd_toStartOf="@id/imageGenericDetail"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@id/txtKeyTitleGeneric"
                                 tools:text="Placa ASD-123" />
