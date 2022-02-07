@@ -4,22 +4,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/contentActivityList"
     android:layout_height="match_parent"
-    tools:context=".ui.MainActivity">
+    tools:context=".ui.home.MainActivity">
 
     <TextView
         android:id="@+id/txtTitleHome"
         android:layout_width="@dimen/size_0"
         android:layout_height="wrap_content"
-        android:text="Bienvenido Ingrese el establecimiento que desea buscar "
+        android:text="@string/text_initial"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:textStyle="bold"
-        android:gravity="center"
+
         android:layout_marginEnd="@dimen/size_24"
         android:layout_marginStart="@dimen/size_24"
         android:layout_marginTop="@dimen/size_48"
-        android:textColor="@color/purple_700"
-        android:textSize="24sp"
+        style="@style/Title_General"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,34 +31,57 @@
         app:cardCornerRadius="@dimen/size_12"
         android:elevation="@dimen/size_12"
         android:layout_margin="@dimen/size_24"
+        app:search_hint="@string/search_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTitleHome"
         android:layout_height="wrap_content" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:id="@+id/contentList"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="@dimen/size_16"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:visibility="visible"
+        android:visibility="gone"
+        tools:visibility="gone"
         app:layout_constraintTop_toBottomOf="@+id/editSearch"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_height="@dimen/size_0">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPlace"
             android:layout_width="match_parent"
             android:layout_margin="@dimen/size_24"
+            tools:itemCount="2"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            tools:listitem="@layout/row_place"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_height="wrap_content"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/placeShimmer"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_0"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/size_16"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/editSearch"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:visibility="gone">
+
+        <include layout="@layout/shimmer_place_row" />
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:visibility="gone"
-        tools:visibility="gone"
+        android:id="@+id/contentErrorGeneric"
+        android:visibility="visible"
         android:padding="@dimen/size_48"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="@dimen/size_16"
@@ -87,9 +109,10 @@
             android:layout_marginTop="@dimen/size_16"
             android:textStyle="bold"
             android:gravity="center"
+            style="@style/Title_Row"
             android:textColor="@color/black"
             android:textSize="20sp"
-            tools:text="Lo sentimos ocurrio un error intentelo de nuevo"
+            android:text="@string/text_search_induce"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_height="wrap_content"/>
 

@@ -27,6 +27,7 @@ android {
 
             buildConfigField "String", BASE_URL, CONFIG("production.server.url")
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            resValue "string", "key_servicechanllenge", CONFIG("key.servicechanllenge")
             minifyEnabled false
             shrinkResources false
             debuggable false
@@ -34,6 +35,7 @@ android {
         debug {
             buildConfigField "String", BASE_URL, CONFIG("qa.server.url")
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            resValue "string", "key_servicechanllenge", CONFIG("key.servicechanllenge")
             debuggable true
         }
     }
@@ -85,6 +87,8 @@ dependencies {
     //Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
+
+    implementation 'com.facebook.shimmer:shimmer:0.5.0@aar'
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

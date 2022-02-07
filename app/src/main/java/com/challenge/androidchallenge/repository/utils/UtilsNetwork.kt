@@ -1,9 +1,16 @@
 package com.challenge.androidchallenge.repository
 
+import android.app.Activity
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.provider.Settings
+import android.view.inputmethod.InputMethodManager
+import com.challenge.androidchallenge.repository.exception.GenericException
+import com.challenge.androidchallenge.repository.utils.generalErrorMessage
+import com.google.gson.Gson
+import okhttp3.ResponseBody
+import retrofit2.Response
 
 fun getDensity(context: Context): Float {
 
@@ -31,5 +38,23 @@ fun Context?.isAirplaneModeActive(): Boolean {
     return this?.let {
         return Settings.Global.getInt(it.contentResolver, Settings.Global.AIRPLANE_MODE_ON, 0) != 0
     } ?: false
+}
+
+fun <T> Response<T>.validateBody() : T {
+    this.body()?.let {
+        return it
+    } ?: throw NullPointerException()
+}
+
+fun ResponseBody?.toCompleteErrorModel() : GenericException? {
+    return this?.let {
+        return Gson().fromJson(it.string(), GenericException::class.java)
+    } ?: GenericException(generalErrorMessage)
+}
+
+fun Activity.hideKeyboard() {
+    val inputMethodManager: InputMethodManager =
+        this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputMethodManager.hideSoftInputFromWindow(this.currentFocus?.windowToken, 0)
 }
 

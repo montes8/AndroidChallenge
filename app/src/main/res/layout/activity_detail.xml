@@ -1,9 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.DetailActivity">
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/contentNestPolice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/contentPolicyGeneric"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="visible">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txtPoliceDomiciliary"
+                        style="@style/Title_General"
+                        android:layout_width="@dimen/size_0"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/size_16"
+                        android:layout_marginTop="@dimen/size_24"
+                        android:layout_marginEnd="@dimen/size_16"
+                        android:letterSpacing="-0.04"
+                        android:text="@string/text_title_detail"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/policyDomiciliaryCardInsured"
+                        android:layout_width="@dimen/size_0"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/size_16"
+                        android:layout_marginTop="@dimen/size_24"
+                        android:layout_marginEnd="@dimen/size_16"
+                        android:background="@drawable/shape_card_bg_24"
+                        android:paddingTop="@dimen/size_24"
+                        android:paddingBottom="@dimen/size_24"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txtPoliceDomiciliary">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/policyConstraintContainerDomiciliary"
+                            android:layout_width="@dimen/size_0"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/size_24"
+                            android:layout_marginEnd="@dimen/size_24"
+                            android:visibility="visible"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:visibility="visible">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/txtKeyTitleGeneric"
+                                style="@style/Title_Row"
+                                android:layout_width="@dimen/size_0"
+                                android:layout_height="wrap_content"
+                                android:text="@string/text_title_name_detail"
+                                app:layout_constraintEnd_toStartOf="@+id/policyImageGeneric"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <androidx.appcompat.widget.AppCompatImageButton
+                                android:id="@+id/policyImageGeneric"
+                                android:layout_width="@dimen/size_48"
+                                android:layout_height="@dimen/size_48"
+                                android:adjustViewBounds="true"
+                                android:background="@null"
+                                android:scaleType="center"
+                                android:src="@drawable/ic_error_generic"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:src="@drawable/ic_error_generic" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/txtValueGeneric"
+                                style="@style/SubTitle_Row"
+                                android:layout_width="@dimen/size_0"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/size_4"
+                                app:layout_constraintEnd_toStartOf="@id/policyImageGeneric"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/txtKeyTitleGeneric"
+                                tools:text="Placa ASD-123" />
+
+                            <View
+                                android:id="@+id/policyDividerPlate"
+                                android:layout_width="@dimen/size_0"
+                                android:layout_height="@dimen/size_1"
+                                android:layout_marginTop="@dimen/size_24"
+                                android:layout_marginBottom="@dimen/size_12"
+                                android:background="@color/gray_end"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/txtValueGeneric" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:id="@+id/rvDetailPlace"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/size_24"
+                            android:layout_marginEnd="@dimen/size_24"
+                            android:overScrollMode="never"
+                            android:scrollbars="none"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/policyConstraintContainerDomiciliary"
+                            tools:itemCount="2"
+                            tools:listitem="@layout/row_detail" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>

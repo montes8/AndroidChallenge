@@ -2,8 +2,10 @@ package com.challenge.androidchallenge.application
 
 import android.app.Application
 import com.challenge.androidchallenge.BuildConfig
+import com.challenge.androidchallenge.R
 import com.challenge.androidchallenge.di.viewModelsModule
 import com.challenge.androidchallenge.repository.di.networkModule
+import com.challenge.androidchallenge.repository.utils.KEY_SERVICE
 import com.challenge.androidchallenge.repository.utils.NAME_BASE_URL
 import com.challenge.androidchallenge.useCaseModule
 import org.koin.android.ext.android.getKoin
@@ -25,6 +27,7 @@ class ApplicationChallenge : Application() {
                 )
             )
             getKoin().setProperty(NAME_BASE_URL, BuildConfig.BASE_URL)
+            getKoin().setProperty(KEY_SERVICE, getString(R.string.key_servicechanllenge))
 
         }
 

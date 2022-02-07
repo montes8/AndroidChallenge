@@ -19,7 +19,7 @@
         android:maxLines="1"
         android:singleLine="true"
         android:textColor="@color/purple_700"
-        android:textColorHint="@color/purple_500"
+        android:textColorHint="@color/purple_200"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btnClear"
         app:layout_constraintStart_toEndOf="parent"

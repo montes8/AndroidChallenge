@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">AndroidChallenge</string>
-    <string name="search_name">Busca por nombre</string>
+    <string name="search_name">Busca por tipo</string>
+    <string name="text_initial">Bienvenido Ingrese el establecimiento que desea buscar</string>
+    <string name="text_search_induce">Aun no has buscado nada, Empieza ahora</string>
+    <string name="text_title_detail">Detalle de establecimiento</string>
+    <string name="text_title_name_detail">Nombre</string>
 </resources>

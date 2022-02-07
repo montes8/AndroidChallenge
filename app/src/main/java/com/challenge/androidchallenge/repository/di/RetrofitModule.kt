@@ -4,8 +4,7 @@ import android.content.Context
 import com.challenge.androidchallenge.BuildConfig
 import com.challenge.androidchallenge.repository.ServiceApi
 import com.challenge.androidchallenge.repository.api.AppNetwork
-import com.challenge.androidchallenge.repository.utils.NAME_BASE_URL
-import com.challenge.androidchallenge.repository.utils.TIMEOUT
+import com.challenge.androidchallenge.repository.utils.*
 import com.challenge.androidchallenge.usecases.repository.IAppRepositoryNetwork
 import okhttp3.Cache
 import okhttp3.Interceptor
@@ -21,7 +20,7 @@ import java.util.concurrent.TimeUnit
 val networkModule = module {
     single { providerHttpLoggingInterceptor() }
     single { providerCache(get()) }
-    single { ApiInterceptor() }
+    single { ApiInterceptor(getProperty(KEY_SERVICE)) }
     single { providerOkHttpClient(get(), get(),get()) }
     single { providerRetrofit(getProperty(NAME_BASE_URL), get()) }
     single { providerApi(get()) }
@@ -66,12 +65,12 @@ fun providerHttpLoggingInterceptor(): HttpLoggingInterceptor {
     return logging
 }
 
-class ApiInterceptor() : Interceptor {
+class ApiInterceptor(private val keyService : String) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         var request = chain.request()
         val builder = request.newBuilder()
-        builder.addHeader("Authorization", "fsq34RCNMAOzydDw3mNUlZLuMbNzJxfrx7teU5KXlyw1CNI=")
-        builder.addHeader("Accept", "application/json")
+        builder.addHeader(Authorization, keyService)
+        builder.addHeader(Accept, CONTENT_TYPE)
         request = builder.build()
         return chain.proceed(request)
     }

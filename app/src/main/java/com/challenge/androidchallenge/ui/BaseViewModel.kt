@@ -8,7 +8,6 @@ import kotlinx.coroutines.launch
 
 open class BaseViewModel : ViewModel() {
     val errorLiveData = MutableLiveData<Throwable>()
-    val loadingLiveData = MutableLiveData<Boolean>()
 
 
     fun executeSuspendNotProgress(func: suspend () -> Unit) =
